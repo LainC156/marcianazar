@@ -106,7 +106,7 @@ class ProductController extends Controller
 
     public function getById($id)
     {
-        $product = Product::join('categories as c', 'c.id', '=', 'products.category_id')
+        $product = Product::with('category')
             ->where('products.id', $id)
             ->select('products.id', 'products.name', 'i.url', 'products.description', 'products.price', 'c.name as category_name')->first();
         return $product;
